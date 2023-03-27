@@ -87,3 +87,4 @@ elif primeira_escolha == 0:
             print('Opção inválida, recomece o questionário.')
 else:
       print('Opção inválida, recomece o questionário.')
+      
