@@ -2,31 +2,27 @@
 
 print('Este é um sistema que irá te ajudar a escolher a sua próxima Distribuição Linux.'
       ' Responda a algumas poucas perguntas para ter uma recomendação.')
-
-print('Seu SO anterior era Linux?\n(0) Não\n(1) Sim')
-primeira_escolha = int(input())
+#cada variável representa as possíveis ramificações que o usuário pode obter a partir de suas escolhas
+primeira_escolha = int(input('Seu SO anterior era Linux?\n(0) Não\n(1) Sim\n'))
 
 if primeira_escolha == 1:
-
-    print('É programador/ desenvolvedor ou de áreas semelhantes?\n(0) Não\n(1) Sim\n(2) Sim, realizo testes e '
-          'invasão de sistemas')
-    segunda_escolha = int(input())
-
+    
+    segunda_escolha = int(input('É programador/ desenvolvedor ou de áreas semelhantes?\n(0) Não\n(1) Sim\n(2) Sim, realizo testes e '
+          'invasão de sistemas\n'))
+    
     if segunda_escolha == 2:
 
         print('Ao trilhar esse caminho, um novo guru do Linux irá surgir, '
               'as distribuições que servirão de base para seu aprendizado são: Kali Linux, Black Arch.')
 
     elif segunda_escolha == 1:
-
-        print('Gostaria de algo pronto para uso ao invés de ficar configurando o SO?\n(0) Não\n(1) Sim')
-        terceira_escolha = int(input())
-
+        
+        terceira_escolha = int(input('Gostaria de algo pronto para uso ao invés de ficar configurando o SO?\n(0) Não\n(1) Sim\n'))
+        
         if terceira_escolha == 1:
-
-            print('Já utilizou Debian ou Ubuntu?\n(0) Não\n(1) Sim')
-            quarta_escolha = int(input())
-
+            
+            quarta_escolha = int(input('Já utilizou Debian ou Ubuntu?\n(0) Não\n(1) Sim\n'))
+            
             if quarta_escolha == 1:
 
                 print('Suas escolhas te levaram a um caminho repleto de desafios, '
@@ -41,10 +37,9 @@ if primeira_escolha == 1:
                 print('Opção inválida, recomece o questionário.')
 
         elif terceira_escolha == 0:
-
-            print('Já utilizou Arch Linux?\n(0) Não\n(1) Sim')
-            quarta_escolha = int(input())
-
+            
+            quarta_escolha = int(input('Já utilizou Arch Linux?\n(0) Não\n(1) Sim\n'))
+            
             if quarta_escolha == 1:
 
                 print('Suas escolhas te levaram a um caminho repleto de desafios,'
@@ -70,9 +65,8 @@ if primeira_escolha == 1:
 
 elif primeira_escolha == 0:
 
-      print('Seu SO anterior era um MacOS?\n(0) Não\n(1) Sim')
-      segunda_escolha = int(input())
-
+      segunda_escolha = int(input('Seu SO anterior era um MacOS?\n(0) Não\n(1) Sim\n'))
+      
       if segunda_escolha == 1:
 
             print('Você passará pelo caminho daqueles que decidiram '
@@ -87,4 +81,5 @@ elif primeira_escolha == 0:
             print('Opção inválida, recomece o questionário.')
 else:
       print('Opção inválida, recomece o questionário.')
+      
       
