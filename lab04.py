@@ -10,16 +10,18 @@ for dia in range(dias):
 	nao_existe = 0
 	presente = -1
 	brigas = 0
-#for d in range(dias):
 
-	numero_pares_brigas = int(input())   #M pares
-
-	for i in range(numero_pares_brigas):
+	#quantos pares de cachorros que brigam temos no dia
+	numero_pares_brigam = int(input())   
+	#recebe os pares e coloca numa lista
+	for i in range(numero_pares_brigam):
 		par = input().split()
-		pares.append(par)#lista dos cachorros que brigam
-							# se for append. ele fica varias listas de 2 em uma lista só
-
+		#lista de listas dos pares que brigam
+		pares.append(par)
+							
+	
 	procedimentos= input().split()
+	#gera lista com os procedimentos disponíveis e outra com as quantidades disponíveis 
 	for n in range(len(procedimentos)//2):
 		procedimentos_disponiveis.append(procedimentos[2*n])
 		quantidades_disponiveis.append(procedimentos[2*n+1])
@@ -28,7 +30,8 @@ for dia in range(dias):
 
 	for n in range(animais_presentes):
 		animais_procedimentos = input().split()
-		procedimentos_solicitados.extend(animais_procedimentos) #animal e o procedimento que ele quer
+		#lista com animais e os procedimentos solicitados
+		procedimentos_solicitados.extend(animais_procedimentos) 
 
 	#algoritmo que calcula o número de brigas:
 	for lista in range(len(pares)):
@@ -38,9 +41,10 @@ for dia in range(dias):
 				if pares[lista][k] == procedimentos_solicitados[j]:
 					presente = presente + 1
 					break
-		if presente == -1:    #primeiro cachorro nao ta, nem adianta ver se o segundo ta
-			break
-		elif presente == 1:
+			#primeiro cachorro não está presente, nem adianta ver se o segundo está.
+			if presente == -1:    
+				break
+		if presente == 1:
 			brigas += 1
 
 	#algoritmo para achar os atendimentos
@@ -58,19 +62,26 @@ for dia in range(dias):
 					
 		if nao_existe == 0:
 			nao_disponiveis.append(procedimentos_solicitados[i-1])
-
+	#saídas
 	print(f'Dia: {dia+1}')
 	print(f'Brigas: {brigas}')
-	print('Animais atendidos: ', end="")
-	for i in cachorros_atendidos:
-		if i == cachorros_atendidos[len(cachorros_atendidos) - 1]:
-			print(f'{i}')
-		else:
-			print(f'{i}, ', end="")
+	if cachorros_atendidos != []:
+		print('Animais atendidos: ', end="")
+		for i in cachorros_atendidos:
+			if i == cachorros_atendidos[len(cachorros_atendidos) - 1]:
+				print(f'{i}')
+			else:
+				print(f'{i}, ', end="")
+							
 	if nao_atendidos != []:
 		print('Animais não atendidos: ', end="")
 		for i in nao_atendidos:
-			print(i)
+			if i == nao_atendidos[len(nao_atendidos) - 1]:
+				print(f'{i}')
+			else:
+				print(f'{i}, ', end="")	
+
 	for i in nao_disponiveis:
 		print(f'Animal {i} solicitou procedimento não disponível.')
-	print('\n')
+	print()
+	
