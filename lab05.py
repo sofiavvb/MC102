@@ -24,19 +24,14 @@ def main():
             genoma = concatenar(genoma, g)
 
         elif operacao[0] == "remover":
-            i = int(operacao[1])
-            j = int(operacao[2])
-            j = min(j, len(genoma))
-            i = min(i, len(genoma))
+            i = min(int(operacao[1]), len(genoma))
+            j = min(int(operacao[2]), len(genoma))
             genoma = remover(genoma, i, j)
 
         elif operacao[0] == "transpor_e_reverter":
-            i = int(operacao[1])
-            j = int(operacao[2])
-            k = int(operacao[3])
-            i = min(i, len(genoma))
-            j = min(j, len(genoma))
-            k = min(k, len(genoma))
+            i = min(int(operacao[1]), len(genoma))
+            j = min(int(operacao[2]), len(genoma))
+            k = min(int(operacao[3]), len(genoma))
             genoma = transpor_e_reverter(genoma, i, j, k)
 
         elif operacao[0] == "buscar":

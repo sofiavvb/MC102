@@ -27,5 +27,3 @@ if maior_jogador == 0:
 else:
     print(f'O jogador número {maior_jogador} vai receber o melhor bolo da cidade pois'
 f' venceu com {maior_pontuacao} ponto(s)!')
-
-
