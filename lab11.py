@@ -211,7 +211,6 @@ class Mapa:
             print(" ".join(linha))
         print()
 
-
 def organizar_monstros(numero_monstros: int):
     monstros = []
     for _ in range(numero_monstros):
@@ -243,7 +242,7 @@ def combate(link: Personagem, monstro: Monstro):
         if link.vivo():
             total_dano_link = link.ataque(monstro)
             print(f"O Personagem deu {total_dano_link} de dano ao monstro na posicao {monstro.x, monstro.y}")
-        elif monstro.vivo():
+        if monstro.vivo():
             total_dano_monstro = monstro.ataque(link)
             print(f"O Monstro deu {total_dano_monstro} de dano ao Personagem. Vida restante = {link.vida}")
 
@@ -279,6 +278,7 @@ def main():
             if link.posicao == monstro.posicao and link.vivo():
                 combate(link, monstro)
         mapa.renderizar()
+
     #dps de descer ate a ultima linha 
     while link.posicao != link.posicao_final and link.vivo():
         link.andar(mapa)
