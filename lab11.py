@@ -40,9 +40,9 @@ class SerVivo(Entidade):
     @vida.setter
     def vida(self, valor):
         if valor < 0:
-            self._valor = 0
+            self._vida = 0
         else:
-            self._valor = valor
+            self._vida = valor
 
     @dano.setter
     def dano(self, valor):
@@ -56,6 +56,7 @@ class SerVivo(Entidade):
             return False
 
     def ataque(self, obj):
+        '''Realiza o ataque de Link ao monstro e vice versa'''
         total_dano = min(obj._vida, self.dano)
         obj._vida -= total_dano
         return total_dano
@@ -68,22 +69,15 @@ class Personagem(SerVivo):
         self._posicao_final = posicao_final
 
     @property
-    def vida(self):
-        return self._vida
-
-    @property
-    def dano(self):
-        return self._dano
-
-    @property
     def posicao_final(self):
         return self._posicao_final
 
     def andar_maldicao(self):
-        # desce pra linha de baixo
+        ''' Link anda ate a ultima linha'''
         self.x += 1
 
     def andar(self, mapa):
+        '''Movimenta a posicao de Link, baseado na paridade da linha que ele está'''
         # se a linha for par:
         if self.x % 2 == 0:
             if self.y == 0:
@@ -98,6 +92,7 @@ class Personagem(SerVivo):
                 self.y += 1
 
     def pegar_objeto(self, objeto):
+        '''Recolhe o objeto'''
         if objeto.tipo == "v":
             self._vida += objeto.status
             objeto._disponivel = False
@@ -114,33 +109,20 @@ class Monstro(SerVivo):
         self._tipo = tipo
 
     @property
-    def vida(self):
-        return self._vida
-
-    @property
-    def dano(self):
-        return self._dano
-
-    @property
     def tipo(self):
         return self._tipo
 
     def andar(self, mapa):
-        if self.tipo == "U":
-            # garante que a linha ta dentro da matriz p andar
-            if self.x != 0:
+        '''Atualiza a posicao do monstro baseado no padrao de movimentacao dele (tipo).
+        Garante tambem que o monstro nao vai extrapolar os limites do mapa.
+        '''
+        if self.tipo == "U" and self.x != 0:
                 self.x -= 1
-        elif self.tipo == "D":
-            # garante que a linha ta dentro da matriz p andar
-            if self.x != (mapa._linhas - 1):
+        elif self.tipo == "D" and self.x != (mapa._linhas - 1):
                 self.x += 1
-        elif self.tipo == "R":
-            # garante que a coluna ta dentro da matriz p andar
-            if self.y != (mapa._colunas - 1):
+        elif self.tipo == "R" and self.y != (mapa._colunas - 1):
                 self.y += 1
-        elif self.tipo == "L":
-            # garante que a coluna ta dentro da matriz p andar
-            if self.y != 0:
+        elif self.tipo == "L" and self.y != 0:
                 self.y -= 1
 
 
@@ -186,7 +168,7 @@ class Mapa:
         self._mapa = None
 
     def renderizar(self):
-        # renderiza o mapa atualizando ele com as posicoes novas dos negócios nas ordem de prioridade do lab
+        '''renderiza o mapa atualizando-o com as posicoes novas, de acordo com a ordem de prioridade dada'''
         self._mapa = [["." for j in range(self._colunas)] for i in range(self._linhas)]
 
         for objeto in self._objetos:
@@ -212,6 +194,7 @@ class Mapa:
         print()
 
 def organizar_monstros(numero_monstros: int):
+    '''Monta uma lista de objetos da classe Monstro'''
     monstros = []
     for _ in range(numero_monstros):
         vida, dano, tipo, posicao = input().split()
@@ -224,7 +207,8 @@ def organizar_monstros(numero_monstros: int):
     return monstros
 
 
-def organizar_objetos(numero_objetos):
+def organizar_objetos(numero_objetos: int):
+    '''Monta uma lista de objetos da classe Objeto'''
     objetos = []
     for _ in range(numero_objetos):
         nome, tipo, posicao, status = input().split()
@@ -238,6 +222,7 @@ def organizar_objetos(numero_objetos):
 
 
 def combate(link: Personagem, monstro: Monstro):
+    '''Link ataca, monstro ataca'''
     if link.posicao != link.posicao_final:
         if link.vivo():
             total_dano_link = link.ataque(monstro)
@@ -248,11 +233,13 @@ def combate(link: Personagem, monstro: Monstro):
 
 
 def monstros_andam(monstros: list[Monstro], mapa):
+    '''Atualiza as posicoes dos monstros'''
     for monstro in monstros:
         monstro.andar(mapa)
 
 
 def main():
+    #entradas
     vida, dano = map(int, input().split())
     n_linhas, n_colunas = map(int, input().split())
     posicao_link = list(map(int, (input().split(","))))
@@ -261,7 +248,7 @@ def main():
     monstros: list[Monstro] = organizar_monstros(n_monstros)
     n_objetos = int(input())
     objetos: list[Objeto] = organizar_objetos(n_objetos)
-    # Instanciando os objetos
+    # instanciando os objetos
     link = Personagem(posicao_link, vida, dano, "link", posicao_saida)
     mapa = Mapa(n_linhas, n_colunas, n_monstros, n_objetos, link, monstros, objetos)
 
@@ -293,7 +280,7 @@ def main():
         mapa.renderizar()
 
     if link.posicao == link.posicao_final:
-        print("Chegou ao fim!")
+        print("Chegou ao fim!\n")
 
 
 if __name__ == "__main__":
